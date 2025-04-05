@@ -13,13 +13,13 @@ header {
 }
 
 main {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
     padding: 20px;
 }
 
 .tier {
-    width: 18%;
     padding: 10px;
     border-radius: 10px;
     text-align: center;
