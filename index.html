@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Vanilla Leaderboard</h1>
+    <div class="header">
+        <h1>Vanilla Leaderboard</h1>
+        <button class="refresh-btn" id="refreshBtn">Refresh Data</button>
+    </div>
     
-    <div class="tiers-container">
-        <!-- Tiers will be populated from players.json -->
+    <div class="tiers-container" id="tiersContainer">
+        <!-- Tiers will be loaded from script.js -->
     </div>
 
     <script src="script.js"></script>
