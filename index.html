@@ -4,18 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vanilla Leaderboard</title>
-    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
-        <h1>Vanilla Leaderboard</h1>
-        <button class="refresh-btn" id="refreshBtn">Refresh Data</button>
-    </header>
-
-    <main class="tiers-container" id="tiersContainer">
+    <h1>Vanilla Leaderboard</h1>
+    
+    <div class="tiers-container">
+        <section class="tier tier-1">
+            <h2>🏆 Tier 1</h2>
+            <div class="players-grid" id="tier1">
+                <!-- Players will be added dynamically -->
+            </div>
+        </section>
         
-    </main>
+        <section class="tier tier-2">
+            <h2>🥈 Tier 2</h2>
+            <div class="players-grid" id="tier2">
+                <!-- Players will be added dynamically -->
+            </div>
+        </section>
+        
+        <section class="tier tier-3">
+            <h2>🥉 Tier 3</h2>
+            <div class="players-grid" id="tier3">
+                <!-- Players will be added dynamically -->
+            </div>
+        </section>
+        
+        <section class="tier tier-4">
+            <h2>🔹 Tier 4</h2>
+            <div class="players-grid" id="tier4">
+                <!-- Players will be added dynamically -->
+            </div>
+        </section>
+        
+        <section class="tier tier-5">
+            <h2>🔸 Tier 5</h2>
+            <div class="players-grid" id="tier5">
+                <!-- Players will be added dynamically -->
+            </div>
+        </section>
+    </div>
 
-    <script src="script.js"></script> 
+    <script src="script.js"></script>
 </body>
 </html>
