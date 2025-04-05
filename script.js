@@ -1,56 +1,26 @@
-const JSON_URL = 'players.json';
-
-async function loadData() {
-    try {
-        const response = await fetch(JSON_URL);
-        if (!response.ok) throw new Error('Failed to load data');
-        return await response.json();
-    } catch (error) {
-        console.error('Error loading data:', error);
-        return {
-            "Tier 1": [{"name": "Error loading data", "tier": "high"}],
-            "Tier 2": [],
-            "Tier 3": [],
-            "Tier 4": [],
-            "Tier 5": []
-        };
-    }
-}
-
-function createPlayerElement(player) {
-    const playerElement = document.createElement('div');
-    playerElement.className = `player ${player.tier}-tier`;
-    playerElement.textContent = player.name;
-    return playerElement;
-}
-
-async function renderLeaderboard() {
-    const data = await loadData();
-    const container = document.getElementById('tiersContainer');
-    container.innerHTML = '';
-
-    for (const [tierName, players] of Object.entries(data)) {
-        const tierElement = document.createElement('div');
-        tierElement.className = 'tier';
-        
-        const header = document.createElement('div');
-        header.className = 'tier-header';
-        header.textContent = tierName;
-        
-        const playersList = document.createElement('div');
-        playersList.className = 'players-list';
-        
-        players.forEach(player => {
-            playersList.appendChild(createPlayerElement(player));
-        });
-        
-        tierElement.appendChild(header);
-        tierElement.appendChild(playersList);
-        container.appendChild(tierElement);
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    renderLeaderboard();
-    document.getElementById('refreshBtn').addEventListener('click', renderLeaderboard);
+    const tiersContainer = document.querySelector('.tiers-container');
+
+    fetch('players.json')
+        .then(response => response.json())
+        .then(data => {
+            updateTiers(data);
+        })
+        .catch(error => console.error('Błąd ładowania danych:', error));
+
+    function updateTiers(players) {
+        tiersContainer.querySelectorAll('.tier ul').forEach(ul => ul.innerHTML = ''); // Wyczyść istniejące listy
+
+        players.forEach(player => {
+            const tierId = `tier-${player.tier}`;
+            const tierElement = document.getElementById(tierId);
+            if (tierElement) {
+                const li = document.createElement('li');
+                li.textContent = player.name;
+                tierElement.querySelector('ul').appendChild(li);
+            }
+        });
+    }
+
+    // Możesz dodać tutaj kod do obsługi zmiany trybu gry (jeśli będzie więcej niż Vanilla)
 });
