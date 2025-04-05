@@ -37,4 +37,20 @@ async function renderLeaderboard() {
         header.className = 'tier-header';
         header.textContent = tierName;
         
-        const playersList = document
+        const playersList = document.createElement('div');
+        playersList.className = 'players-list';
+        
+        players.forEach(player => {
+            playersList.appendChild(createPlayerElement(player));
+        });
+        
+        tierElement.appendChild(header);
+        tierElement.appendChild(playersList);
+        container.appendChild(tierElement);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderLeaderboard();
+    document.getElementById('refreshBtn').addEventListener('click', renderLeaderboard);
+});
