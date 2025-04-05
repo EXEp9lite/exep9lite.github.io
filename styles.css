@@ -78,6 +78,12 @@ h2 {
 .tier-3 h2::before {
     content: "🥉";
 }
+.tier-4 h2::before {
+    content: "🔷";
+}
+.tier-5 h2::before {
+    content: "⭐";
+}
 
 .players-grid {
     display: grid;
@@ -142,10 +148,6 @@ h2 {
 
 .tier-3 .player::before {
     content: "🔹";
-}
-
-hr {
-    display: none; /* Ukrywamy linie rozdzielające, ponieważ tiery są teraz obok siebie */
 }
 
 @media (max-width: 768px) {
