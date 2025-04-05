@@ -1,7 +1,8 @@
 {
     "Tier 1": [
-        {"name": "Player1", "tier": "high"},
+        {"name": "testiren", "tier": "high"},
         {"name": "Blacker", "tier": "low"}
+        {"name": "Blacker2", "tier": "low"}
     ],
     "Tier 2": [
         {"name": "Player3", "tier": "high"},
