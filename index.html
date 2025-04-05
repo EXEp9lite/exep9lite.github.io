@@ -3,52 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCTiers</title>
+    <title>MC TIERS - Ranking Graczy Minecraft DoorPvP</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <header>
-        <div class="logo">MCTIERS</div>
-        <nav>
-            <ul>
-                <li><a href="#" class="active">Vanilla</a></li>
-                </ul>
-        </nav>
-        <div class="search">
-            <input type="text" placeholder="Szukaj gracza...">
-            <button>Q</button>
+    <div class="header">
+        <div class="logo">MC<span>TIERS</span></div>
+        <div class="navigation">
+            <a href="#"><span><i class="fas fa-home"></i></span> Strona Główna</a>
+            <a href="https://discord.gg/uyaaBcvddr" target="_blank"><span><i class="fab fa-discord"></i></span> Discord</a>
         </div>
-    </header>
+        <div class="search-container">
+            <span class="search-icon"><i class="fas fa-search"></i></span>
+            <input type="text" class="search-input" placeholder="Szukaj gracza...">
+        </div>
+    </div>
 
-    <main>
-        <div class="tiers-container">
-            <div class="tier" id="tier-1">
-                <h2>Tier 1</h2>
-                <ul>
-                    </ul>
-            </div>
-            <div class="tier" id="tier-2">
-                <h2>Tier 2</h2>
-                <ul>
-                    </ul>
-            </div>
-            <div class="tier" id="tier-3">
-                <h2>Tier 3</h2>
-                <ul>
-                    </ul>
-            </div>
-            <div class="tier" id="tier-4">
-                <h2>Tier 4</h2>
-                <ul>
-                    </ul>
-            </div>
-            <div class="tier" id="tier-5">
-                <h2>Tier 5</h2>
-                <ul>
-                    </ul>
-            </div>
+    <div class="game-mode">
+        <span class="game-mode-icon"><i class="fas fa-door-open"></i></span>
+        <span class="game-mode-text">DoorPvP</span>
+    </div>
+
+    <div class="main-content" id="tier-container">
         </div>
-    </main>
+
+    <button class="show-kit-button" id="showKit">
+        <span><i class="fas fa-swords"></i></span> POKAŻ ZESTAW
+    </button>
+
+    <div class="kit-overlay" id="kitOverlay">
+        <div class="kit-content">
+            <div class="kit-header">
+                <div class="kit-title">Podstawowy Zestaw DoorPvP</div>
+                <button class="close-kit" id="closeKit">&times;</button>
+            </div>
+            <img src="https://i.ibb.co/PZBb4wLq/Zrzut-ekranu-2025-04-04-203004.png" alt="DoorPvP Kit" class="kit-image">
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
