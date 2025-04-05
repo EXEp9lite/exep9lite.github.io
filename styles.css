@@ -95,23 +95,40 @@ main {
 }
 
 .tier ul li {
-    padding: 0.7rem 1rem; /* Dodano padding po bokach */
+    padding: 0.7rem 0;
     border-bottom: 1px solid #333;
-    display: block; /* Zmieniono na block, aby tło wypełniało całą szerokość */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: #ddd;
-    text-decoration: none; /* Usuwamy potencjalne podkreślenia */
 }
 
 .tier ul li:last-child {
     border-bottom: none;
 }
 
+.tier ul li span:first-child {
+    /* Numer gracza */
+    color: #888;
+    margin-right: 0.5rem;
+}
+
 .tier ul li.high {
-    background-color: #2962ff; /* Ciemnoniebieski */
+    background-color: #37474f; /* Ciemniejszy odcień szarości */
     color: #fff;
 }
 
 .tier ul li.low {
-    background-color: #64b5f6; /* Jasnoniebieski */
-    color: #212121; /* Ciemniejszy kolor tekstu dla lepszego kontrastu */
+    background-color: #263238; /* Jaśniejszy odcień szarości */
+    color: #ccc;
+}
+
+.tier ul li a {
+    color: #58a6ff; /* Link do profilu (możesz zmienić) */
+    text-decoration: none;
+    margin-left: 0.5rem;
+}
+
+.tier ul li a:hover {
+    text-decoration: underline;
 }
