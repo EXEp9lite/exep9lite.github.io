@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla Leaderboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .tiers-container {
+            display: flex;
+            height: calc(100vh - 60px);
+            margin-top: 60px;
+            overflow-x: auto;
+            padding: 0 10px;
+        }
+        
+        .tier {
+            min-width: 250px;
+            flex: 1;
+            margin: 0 5px;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - 20px);
+        }
+        
+        .tier-header {
+            color: #3498db;
+            font-size: 1.5em;
+            padding: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            background-color: #252525;
+            border-radius: 5px;
+            position: sticky;
+            top: 0;
+        }
+        
+        .players-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #3498db #2d2d2d;
+        }
+        
+        .players-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .players-list::-webkit-scrollbar-track {
+            background: #2d2d2d;
+        }
+        
+        .players-list::-webkit-scrollbar-thumb {
+            background-color: #3498db;
+            border-radius: 6px;
+        }
+        
+        .player {
+            padding: 12px;
+            margin-bottom: 8px;
+            background-color: #3a3a3a;
+            border-radius: 5px;
+            text-align: center;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        
+        .player:hover {
+            background-color: #3498db;
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .tier:nth-child(1) .tier-header {
+            color: #ffd700;
+        }
+        
+        .tier:nth-child(2) .tier-header {
+            color: #c0c0c0;
+        }
+        
+        .tier:nth-child(3) .tier-header {
+            color: #cd7f32;
+        }
+        
+        @media (max-width: 768px) {
+            .tiers-container {
+                flex-wrap: nowrap;
+            }
+            
+            .tier {
+                min-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Vanilla Leaderboard</h1>
+    </div>
+    
+    <div class="tiers-container">
+        <div class="tier">
+            <div class="tier-header">Tier 1</div>
+            <div class="players-list" id="tier1">
+                <!-- Players will be added here -->
+            </div>
+        </div>
+        
+        <div class="tier">
+            <div class="tier-header">Tier 2</div>
+            <div class="players-list" id="tier2">
+                <!-- Players will be added here -->
+            </div>
+        </div>
+        
+        <div class="tier">
+            <div class="tier-header">Tier 3</div>
+            <div class="players-list" id="tier3">
+                <!-- Players will be added here -->
+            </div>
+        </div>
+        
+        <div class="tier">
+            <div class="tier-header">Tier 4</div>
+            <div class="players-list" id="tier4">
+                <!-- Players will be added here -->
+            </div>
+        </div>
+        
+        <div class="tier">
+            <div class="tier-header">Tier 5</div>
+            <div class="players-list" id="tier5">
+                <!-- Players will be added here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Przykładowe dane - możesz je zmienić
+        const players = {
+            tier1: ["MythicPlayer", "ProGamer123", "EliteWarrior", "TopFragger"],
+            tier2: ["SkilledOne", "FastReact", "PrecisionX", "TacticalMind", "QuickScope"],
+            tier3: ["AverageJoe", "CasualPlayer", "WeekendWarrior", "PartTimer"],
+            tier4: ["Rookie123", "NewbiePro", "LearningFast", "ImprovingDaily"],
+            tier5: ["JustStarted", "FirstTimer", "NoobMaster", "BabySteps"]
+        };
+
+        // Dodanie graczy do listy
+        function addPlayers() {
+            for (const tier in players) {
+                const list = document.getElementById(tier);
+                players[tier].forEach(player => {
+                    const playerElement = document.createElement("div");
+                    playerElement.className = "player";
+                    playerElement.textContent = player;
+                    list.appendChild(playerElement);
+                });
+            }
+        }
+
+        // Inicjalizacja po załadowaniu strony
+        window.onload = addPlayers;
+    </script>
+</body>
+</html>
