@@ -1,43 +1,15 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MC TIERS - Ranking Graczy Minecraft Vanilla</title>
+    <title>Vanilla Leaderboard</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Dodaję tutaj podstawowe style dla ikon, aby nie było błędów w konsoli */
-        .fas, .fab {
-            font-style: normal; /* Zapobiega kursywie */
-            -webkit-font-smoothing: antialiased;
-        }
-        .fa-home::before { content: "🏠"; }
-        .fa-search::before { content: "🔍"; }
-        .fa-door-open::before { content: "🚪"; }
-        .fa-minecraft::before { content: "🧱"; }
-        .fa-swords::before { content: "⚔️"; }
-        .fa-chevron-down::before { content: "▼"; }
-        .fa-caret-up::before { content: "▲"; }
-    </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">MC<span>TIERS</span></div>
-        <div class="navigation">
-            <a href="#" class="active"><span><i class="fas fa-home"></i></span> Vanilla</a>
-        </div>
-        <div class="search-container">
-            <span class="search-icon"><i class="fas fa-search"></i></span>
-            <input type="text" class="search-input" placeholder="Szukaj gracza...">
-        </div>
-    </div>
+    <h1>Vanilla Leaderboard</h1>
 
-    <div class="game-mode">
-        <span class="game-mode-icon"><i class="fab fa-minecraft"></i></span>
-        <span class="game-mode-text">Vanilla</span>
-    </div>
-
-    <div class="main-content" id="tier-container">
+    <div id="leaderboard">
         </div>
 
     <script src="script.js"></script>
