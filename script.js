@@ -2,38 +2,49 @@ document.addEventListener('DOMContentLoaded', function() {
     const tierContainer = document.getElementById('tier-container');
     const searchInput = document.querySelector('.search-input');
 
-    let tiersData = []; // Store fetched tier data
+    let playersData = []; // Store fetched players data
 
     fetch('players.json')
         .then(response => response.json())
         .then(data => {
-            tiersData = data;
+            playersData = data;
             renderTiers(data);
         })
         .catch(error => console.error('Błąd ładowania danych:', error));
 
-    function renderTiers(tiers) {
-        tierContainer.innerHTML = ''; // Clear existing tiers
-
-        tiers.forEach((tierData, index) => {
+    function renderTiers(players) {
+        // Create tier columns if they don't exist
+        for (let i = 1; i <= 5; i++) {
+            const tierId = `tier-${i}`;
             const tierColumn = document.createElement('div');
             tierColumn.className = 'tier-column';
-            tierColumn.dataset.tier = tierData.tier.toLowerCase().replace(/\s/g, '-');
-            tierColumn.style.animationDelay = `${index * 0.1}s`;
+            tierColumn.dataset.tier = `tier-${i}`;
+            tierColumn.style.animationDelay = `${(i - 1) * 0.1}s`;
 
             const tierHeader = document.createElement('div');
             tierHeader.className = 'tier-header';
-            tierHeader.style.backgroundColor = getTierColor(tierData.tier);
+            tierHeader.style.backgroundColor = getTierColor(`Tier ${i}`);
             tierHeader.innerHTML = `
-                <div class="trophy">🏆 ${tierData.tier}</div>
+                <div class="trophy">🏆 Tier ${i}</div>
                 <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
             `;
             tierColumn.appendChild(tierHeader);
 
             const playersContainer = document.createElement('div');
             playersContainer.className = 'tier-players';
+            tierColumn.appendChild(playersContainer);
+            tierContainer.appendChild(tierColumn);
 
-            tierData.players.forEach(player => {
+            // Add collapsible functionality
+            tierHeader.addEventListener('click', () => {
+                tierColumn.classList.toggle('collapsed');
+            });
+        }
+
+        // Populate tier columns with players
+        players.forEach(player => {
+            const tierColumn = document.querySelector(`.tier-column[data-tier="tier-${player.tier}"] .tier-players`);
+            if (tierColumn) {
                 const tierPlayer = document.createElement('div');
                 tierPlayer.className = 'tier-player';
                 tierPlayer.dataset.name = player.name.toLowerCase();
@@ -61,16 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 tierPlayer.appendChild(playerRank);
-                playersContainer.appendChild(tierPlayer);
-            });
-
-            tierColumn.appendChild(playersContainer);
-            tierContainer.appendChild(tierColumn);
-
-            // Add collapsible functionality
-            tierHeader.addEventListener('click', () => {
-                tierColumn.classList.toggle('collapsed');
-            });
+                tierColumn.appendChild(tierPlayer);
+            }
         });
     }
 
@@ -88,40 +91,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Improved search functionality
     searchInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase().trim();
-        let visiblePlayers = 0;
 
-        const tierColumns = document.querySelectorAll('.tier-column');
-
-        tierColumns.forEach(column => {
-            let columnHasVisiblePlayers = false;
-            const players = column.querySelectorAll('.tier-player');
-
-            players.forEach(player => {
-                const playerName = player.dataset.name;
-                if (playerName.includes(searchTerm)) {
+        document.querySelectorAll('.tier-column').forEach(column => {
+            let hasVisiblePlayers = false;
+            column.querySelectorAll('.tier-player').forEach(player => {
+                if (player.dataset.name.includes(searchTerm)) {
                     player.style.display = 'flex';
-                    columnHasVisiblePlayers = true;
-                    visiblePlayers++;
+                    hasVisiblePlayers = true;
                 } else {
                     player.style.display = 'none';
                 }
             });
-
-            if (columnHasVisiblePlayers) {
-                column.classList.remove('empty');
-            } else {
-                column.classList.add('empty');
-            }
+            column.classList.toggle('empty', !hasVisiblePlayers);
         });
-
-        if (searchTerm === '') {
-            tierColumns.forEach(column => {
-                column.classList.remove('empty');
-                const players = column.querySelectorAll('.tier-player');
-                players.forEach(player => {
-                    player.style.display = 'flex';
-                });
-            });
-        }
     });
 });
