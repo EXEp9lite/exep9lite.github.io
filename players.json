@@ -1,11 +1,71 @@
-[
-  { "name": "GraczA", "tier": 1, "isHT": true },
-  { "name": "GraczB", "tier": 1, "isHT": false },
-  { "name": "GraczC", "tier": 2, "isHT": false },
-  { "name": "GraczD", "tier": 2, "isHT": true },
-  { "name": "Axillity", "tier": 3, "isHT": true },
-  { "name": "Bokshaq", "tier": 3, "isHT": false },
-  { "name": "WojPRO1", "tier": 3, "isHT": false },
-  { "name": "GraczE", "tier": 4, "isHT": false },
-  { "name": "GraczF", "tier": 5, "isHT": true }
-]
+{
+  "tier1": [
+    { "name": "Marlowww", "tierType": "high" },
+    { "name": "GalleryWalk", "tierType": "high" },
+    { "name": "Testmaster11", "tierType": "high" },
+    { "name": "Mekz", "tierType": "high" }
+  ],
+  "tier2": [
+    { "name": "KIRBE", "tierType": "high" },
+    { "name": "Cowarted", "tierType": "high" },
+    { "name": "Toliro", "tierType": "high" },
+    { "name": "NITROOOOOO", "tierType": "high" },
+    { "name": "Legertje08", "tierType": "low" },
+    { "name": "367k", "tierType": "low" },
+    { "name": "ImOnlyAHuman", "tierType": "low" },
+    { "name": "KingD3fault", "tierType": "low" },
+    { "name": "AndrewW", "tierType": "low" },
+    { "name": "pomgiz", "tierType": "low" },
+    { "name": "Lopezqui", "tierType": "low" },
+    { "name": "mystoqn", "tierType": "low" },
+    { "name": "Clutch", "tierType": "low" },
+    { "name": "FINISH", "tierType": "low" }
+  ],
+  "tier3": [
+    { "name": "SharpOrganic985", "tierType": "low" },
+    { "name": "zesolution", "tierType": "low" },
+    { "name": "bapskii", "tierType": "low" },
+    { "name": "Scraxlee", "tierType": "low" },
+    { "name": "shadebim", "tierType": "low" },
+    { "name": "FatalDose", "tierType": "low" },
+    { "name": "Drakelover20", "tierType": "low" },
+    { "name": "gufl", "tierType": "low" },
+    { "name": "zvrdy", "tierType": "low" },
+    { "name": "Lxende", "tierType": "low" },
+    { "name": "Massabate", "tierType": "low" },
+    { "name": "NickofPlayzYT", "tierType": "low" },
+    { "name": "UmFrost", "tierType": "low" },
+    { "name": "Tier2Soon", "tierType": "low" }
+  ],
+  "tier4": [
+    { "name": "HTSKillaFanboy", "tierType": "low" },
+    { "name": "Norvous", "tierType": "low" },
+    { "name": "walsilis", "tierType": "low" },
+    { "name": "melopp", "tierType": "low" },
+    { "name": "Scol", "tierType": "low" },
+    { "name": "Dead_Seraphim", "tierType": "low" },
+    { "name": "OutOfOrd3r", "tierType": "low" },
+    { "name": "Svarta_Erik", "tierType": "low" },
+    { "name": "IeBestVfW", "tierType": "low" },
+    { "name": "JelleFr_", "tierType": "low" },
+    { "name": "Mal_Ejvwdb", "tierType": "low" },
+    { "name": "Vyriax", "tierType": "low" },
+    { "name": "SoGuy", "tierType": "low" },
+    { "name": "Felnious", "tierType": "low" }
+  ],
+  "tier5": [
+    { "name": "monkey_bannana", "tierType": "low" },
+    { "name": "dMaxy", "tierType": "low" },
+    { "name": "BotZeruto", "tierType": "low" },
+    { "name": "Splashy_2", "tierType": "low" },
+    { "name": "spoconaSTOPA", "tierType": "low" },
+    { "name": "ItzDinka", "tierType": "low" },
+    { "name": "Leo_Epicos", "tierType": "low" },
+    { "name": "_Okool_", "tierType": "low" },
+    { "name": "UniformRiver369", "tierType": "low" },
+    { "name": "veeoube", "tierType": "low" },
+    { "name": "Stiv_Omega29", "tierType": "low" },
+    { "name": "lev_was_taken", "tierType": "low" },
+    { "name": "_KroNuM_", "tierType": "low" }
+  ]
+}
