@@ -93,6 +93,7 @@ h2 {
     align-items: center;
     gap: 8px;
     color: #ddd;
+    order: 1; /* Domyślna kolejność */
 }
 
 .tier-1 .player {
@@ -135,12 +136,14 @@ h2 {
     background-color: #2962ff; /* Ciemnoniebieski dla high */
     color: #fff;
     border-color: #2962ff;
+    order: 0; /* Wyższa kolejność dla high */
 }
 
 .player.low {
     background-color: #64b5f6; /* Jasnoniebieski dla low */
     color: #212121;
     border-color: #64b5f6;
+    order: 2; /* Niższa kolejność dla low */
 }
 
 .player::before {
