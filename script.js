@@ -1,6 +1,6 @@
 // Ścieżka do Twojego pliku JSON na GitHub
 // Zastąp 'username/repo' swoimi danymi
-const JSON_URL = 'https://raw.githubusercontent.com/username/repo/main/players.json';
+const JSON_URL = 'players.json';
 
 // Funkcja do ładowania danych z cache'owaniem
 async function loadData() {
