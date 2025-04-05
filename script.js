@@ -1,18 +1,39 @@
 fetch('players.json')
     .then(response => response.json())
     .then(data => {
-        Object.keys(data).forEach(tier => {
-            const tierSection = document.getElementById(tier);
-            const playersGrid = tierSection.querySelector('.players-grid');
-
-            data[tier].forEach(player => {
-                const playerElement = document.createElement('div');
-                playerElement.classList.add('player');
-                playerElement.textContent = player;
-                playersGrid.appendChild(playerElement);
-            });
-        });
-    })
-    .catch(error => {
-        console.error('Błąd podczas ładowania danych:', error);
+        loadPlayers(data.lowTier, document.querySelector('.low-tier .tiers'), false);
+        loadPlayers(data.highTier, document.querySelector('.high-tier .tiers'), true);
     });
+
+function loadPlayers(players, container, isHighTier) {
+    const tiers = {};
+
+    players.forEach(player => {
+        if (!tiers[player.tier]) {
+            tiers[player.tier] = [];
+        }
+        tiers[player.tier].push(player.name);
+    });
+
+    for (const tier in tiers) {
+        const section = document.createElement('section');
+        section.classList.add('tier-section', `tier-${tier}`, isHighTier ? 'high' : 'low');
+
+        const header = document.createElement('h2');
+        header.textContent = `Tier ${tier}`;
+        section.appendChild(header);
+
+        const grid = document.createElement('div');
+        grid.classList.add('players-grid');
+
+        tiers[tier].forEach(name => {
+            const playerDiv = document.createElement('div');
+            playerDiv.classList.add('player');
+            playerDiv.textContent = name;
+            grid.appendChild(playerDiv);
+        });
+
+        section.appendChild(grid);
+        container.appendChild(section);
+    }
+}
