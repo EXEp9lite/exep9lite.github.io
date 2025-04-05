@@ -23,8 +23,8 @@ h1 {
 }
 
 .tiers-container {
-    display: flex;
-    flex-wrap: wrap; /* Pozwoli tierom przechodzić do nowej linii, jeśli nie mieszczą się */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Używamy grid zamiast flex */
     gap: 20px; /* Odstęp między tierami */
     margin-bottom: 30px; /* Odstęp pod kontenerem tierów */
 }
@@ -35,8 +35,8 @@ h1 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 25px;
     border-left: 6px solid;
-    flex: 1; /* Każdy tier zajmuje równą dostępną przestrzeń */
-    min-width: 300px; /* Minimalna szerokość tieru */
+    /* flex: 1; Usunięto, bo używamy grid */
+    min-width: 0; /* Pozwalamy minmax zadziałać poprawnie z grid */
 }
 
 .tier-1 {
@@ -152,10 +152,7 @@ h2 {
 
 @media (max-width: 768px) {
     .tiers-container {
-        flex-direction: column; /* Węższe ekrany: tiery jeden pod drugim */
-    }
-    .tier-section {
-        min-width: auto; /* Pozwól tierom zajmować pełną szerokość */
+        grid-template-columns: 1fr; /* Na mniejszych ekranach jeden tier na wiersz */
     }
     .players-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
