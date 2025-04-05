@@ -35,14 +35,16 @@ h1 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 25px;
     border-left: 6px solid;
-    min-width: 0;
 }
 
-.tier-1 { border-color: #ffd700; }
-.tier-2 { border-color: #c0c0c0; }
-.tier-3 { border-color: #cd7f32; }
-.tier-4 { border-color: #3498db; }
-.tier-5 { border-color: #9b59b6; }
+.low-tier {
+    border-color: #3498db;
+}
+
+.high-tier {
+    border-color: #2c3e50;
+    background-color: #e0e0e0;
+}
 
 h2 {
     font-size: 1.8rem;
@@ -52,11 +54,13 @@ h2 {
     gap: 10px;
 }
 
-.tier-1 h2::before { content: "🏆"; }
-.tier-2 h2::before { content: "🥈"; }
-.tier-3 h2::before { content: "🥉"; }
-.tier-4 h2::before { content: "🔷"; }
-.tier-5 h2::before { content: "⭐"; }
+.low-tier h2::before {
+    content: "⬇️";
+}
+
+.high-tier h2::before {
+    content: "⬆️";
+}
 
 .players-grid {
     display: grid;
@@ -76,35 +80,16 @@ h2 {
     gap: 8px;
 }
 
-.tier-1 .player { border-color: #ffd700; background-color: #fffae6; }
-.tier-2 .player { border-color: #c0c0c0; background-color: #f5f5f5; }
-.tier-3 .player { border-color: #cd7f32; background-color: #f8f1e6; }
-.tier-4 .player { border-color: #3498db; background-color: #ebf5fb; }
-.tier-5 .player { border-color: #9b59b6; background-color: #f5eef8; }
+.low-tier .player {
+    border-color: #3498db;
+}
+
+.high-tier .player {
+    border-color: #2c3e50;
+    background-color: #d5d5d5;
+}
 
 .player:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.player::before {
-    font-size: 0.9rem;
-    opacity: 0.7;
-}
-
-.tier-1 .player::before { content: "👑"; }
-.tier-2 .player::before { content: "⭐"; }
-.tier-3 .player::before { content: "🔹"; }
-
-@media (max-width: 768px) {
-    .tiers-container {
-        grid-template-columns: 1fr;
-    }
-
-    .players-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
-
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.5rem; }
 }
