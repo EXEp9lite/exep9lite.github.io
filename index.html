@@ -145,7 +145,7 @@
                 try {
                     // Ścieżka do pliku players.json w Twoim repozytorium
                     // Zastąp 'username/repo' swoimi danymi
-                    const response = await fetch('https://raw.githubusercontent.com/username/repo/main/players.json?t=' + now);
+                    const response = await fetch('https://raw.githubusercontent.com/exep9lite/repo/main/players.json?t=' + now);
                     
                     if (!response.ok) {
                         throw new Error('Failed to load player data');
