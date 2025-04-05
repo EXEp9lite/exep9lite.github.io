@@ -5,7 +5,7 @@ const JSON_URL = 'players.json';
 // Funkcja do ładowania danych z cache'owaniem
 async function loadData() {
     try {
-        const response = await fetch(`${JSON_URL}?t=${Date.now()}`);
+        const response = await fetch(`${JSON_URL}
         if (!response.ok) throw new Error('Failed to load data');
         return await response.json();
     } catch (error) {
