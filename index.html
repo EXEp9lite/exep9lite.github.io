@@ -1,188 +1,160 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vanilla Leaderboard</title>
     <style>
-        /* Stylizacja dla kontenera tierów i sekcji tierów */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         .tiers-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+            margin-bottom: 30px;
         }
+
         .tier-section {
-            flex: 1;
-            min-width: 200px; /* Zmniejszyłem min-width, żeby zmieściły się obok siebie */
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 15px;
+            padding: 25px;
             border-left: 6px solid;
+            flex: 1;
+            min-width: 200px;
         }
+
         .tier-1 { border-color: #ffd700; }
         .tier-2 { border-color: #c0c0c0; }
         .tier-3 { border-color: #cd7f32; }
         .tier-4 { border-color: #3498db; }
         .tier-5 { border-color: #9b59b6; }
 
-        .tier-section h2 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 10px;
         }
+
         .tier-1 h2::before { content: "🏆"; }
         .tier-2 h2::before { content: "🥈"; }
         .tier-3 h2::before { content: "🥉"; }
         .tier-4 h2::before { content: "🔷"; }
         .tier-5 h2::before { content: "⭐"; }
 
-        /* Stylizacja dla tabel */
-        table {
-            border-collapse: collapse;
-            width: 100%;
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 6px;
-            text-align: left;
-            font-size: 0.9rem;
+
+        .player {
+            background-color: #f9f9f9;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.2s;
+            border-left: 4px solid;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        th {
-            background-color: #f2f2f2;
+
+        .tier-1 .player { background-color: #fffae6; border-color: #ffd700; }
+        .tier-2 .player { background-color: #f5f5f5; border-color: #c0c0c0; }
+        .tier-3 .player { background-color: #f8f1e6; border-color: #cd7f32; }
+        .tier-4 .player { background-color: #ebf5fb; border-color: #3498db; }
+        .tier-5 .player { background-color: #f5eef8; border-color: #9b59b6; }
+
+        .player:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .player::before {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .tier-1 .player::before { content: "👑"; }
+        .tier-2 .player::before { content: "⭐"; }
+        .tier-3 .player::before { content: "🔹"; }
+
+        @media (max-width: 768px) {
+            .tiers-container {
+                flex-direction: column;
+            }
+            .tier-section {
+                min-width: auto;
+            }
+            .players-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
         }
     </style>
-    <script>
-        // Dane graczy w formacie JSON
-        var playersData = [
-            { tier: 1, name: "Marlowww" },
-            { tier: 1, name: "GalleryWalk" },
-            { tier: 1, name: "Testmaster11" },
-            { tier: 1, name: "Mekz" },
-            { tier: 2, name: "KIRBE" },
-            { tier: 2, name: "Cowarted" },
-            { tier: 2, name: "Toliro" },
-            { tier: 2, name: "NITROOOOOO" },
-            { tier: 2, name: "Legertje08" },
-            { tier: 2, name: "367k" },
-            { tier: 2, name: "ImOnlyAHuman" },
-            { tier: 2, name: "KingD3fault" },
-            { tier: 2, name: "AndrewW" },
-            { tier: 2, name: "pomgiz" },
-            { tier: 2, name: "Lopezqui" },
-            { tier: 2, name: "mystoqn" },
-            { tier: 2, name: "Clutch" },
-            { tier: 2, name: "FINISH" },
-            { tier: 3, name: "SharpOrganic985" },
-            { tier: 3, name: "zesolution" },
-            { tier: 3, name: "bapskii" },
-            { tier: 3, name: "Scraxlee" },
-            { tier: 3, name: "shadebim" },
-            { tier: 3, name: "FatalDose" },
-            { tier: 3, name: "Drakelover20" },
-            { tier: 3, name: "gufl" },
-            { tier: 3, name: "zvrdy" },
-            { tier: 3, name: "Lxende" },
-            { tier: 3, name: "Massabate" },
-            { tier: 3, name: "NickofPlayzYT" },
-            { tier: 3, name: "UmFrost" },
-            { tier: 3, name: "Tier2Soon" },
-            { tier: 4, name: "HTSKillaFanboy" },
-            { tier: 4, name: "Norvous" },
-            { tier: 4, name: "walsilis" },
-            { tier: 4, name: "melopp" },
-            { tier: 4, name: "Scol" },
-            { tier: 4, name: "Dead_Seraphim" },
-            { tier: 4, name: "OutOfOrd3r" },
-            { tier: 4, name: "Svarta_Erik" },
-            { tier: 4, name: "IeBestVfW" },
-            { tier: 4, name: "JelleFr_" },
-            { tier: 4, name: "Mal_Ejvwdb" },
-            { tier: 4, name: "Vyriax" },
-            { tier: 4, name: "SoGuy" },
-            { tier: 4, name: "Felnious" },
-            { tier: 5, name: "monkey_bannana" },
-            { tier: 5, name: "dMaxy" },
-            { tier: 5, name: "BotZeruto" },
-            { tier: 5, name: "Splashy_2" },
-            { tier: 5, name: "spoconaSTOPA" },
-            { tier: 5, name: "ItzDinka" },
-            { tier: 5, name: "Leo_Epicos" },
-            { tier: 5, name: "_Okool_" },
-            { tier: 5, name: "UniformRiver369" },
-            { tier: 5, name: "veeoube" },
-            { tier: 5, name: "Stiv_Omega29" },
-            { tier: 5, name: "lev_was_taken" },
-            { tier: 5, name: "_KroNuM_" }
-        ];
-        // Funkcja do tworzenia tabeli
-        function createTable(tier, players) {
-            var table = document.createElement("table");
-            var thead = table.createTHead();
-            var headerRow = thead.insertRow();
-            var headerCell = headerRow.insertCell();
-            headerCell.textContent = "Gracz";
-            var tbody = table.createTBody();
-            for (var i = 0; i < players.length; i++) {
-                var player = players[i];
-                var row = tbody.insertRow();
-                var cell = row.insertCell();
-                cell.textContent = player.name;
-            }
-            return table;
-        }
-        // Pobieranie elementów HTML
-        var tiersContainer = document.querySelector(".tiers-container");
-        var tier1Section = document.querySelector(".tier-1");
-        var tier2Section = document.querySelector(".tier-2");
-        var tier3Section = document.querySelector(".tier-3");
-        var tier4Section = document.createElement("div");
-        tier4Section.classList.add("tier-section", "tier-4");
-        var tier4Heading = document.createElement("h2");
-        tier4Heading.textContent = "Tier 4";
-        tier4Section.appendChild(tier4Heading);
-
-        var tier5Section = document.createElement("div");
-        tier5Section.classList.add("tier-section", "tier-5");
-        var tier5Heading = document.createElement("h2");
-        tier5Heading.textContent = "Tier 5";
-        tier5Section.appendChild(tier5Heading);
-
-        tiersContainer.appendChild(tier4Section);
-        tiersContainer.appendChild(tier5Section);
-
-        // Filtrowanie graczy według tieru
-        function getPlayersByTier(tier) {
-            return playersData.filter(function(player) {
-                return player.tier === tier;
-            });
-        }
-
-        var tier1Players = getPlayersByTier(1);
-        var tier2Players = getPlayersByTier(2);
-        var tier3Players = getPlayersByTier(3);
-        var tier4Players = getPlayersByTier(4);
-        var tier5Players = getPlayersByTier(5);
-
-        // Tworzenie tabel i dodawanie ich do sekcji
-        tier1Section.appendChild(createTable(1, tier1Players));
-        tier2Section.appendChild(createTable(2, tier2Players));
-        tier3Section.appendChild(createTable(3, tier3Players));
-        tier4Section.appendChild(createTable(4, tier4Players));
-        tier5Section.appendChild(createTable(5, tier5Players));
-    </script>
 </head>
 <body>
+    <h1>Vanilla Leaderboard</h1>
     <div class="tiers-container">
-        <div class="tier-section tier-1">
+        <section class="tier-section tier-1">
             <h2>Tier 1</h2>
-        </div>
-        <div class="tier-section tier-2">
+            <div class="players-grid">
+                </div>
+        </section>
+        <section class="tier-section tier-2">
             <h2>Tier 2</h2>
-        </div>
-        <div class="tier-section tier-3">
+            <div class="players-grid">
+                </div>
+        </section>
+        <section class="tier-section tier-3">
             <h2>Tier 3</h2>
-        </div>
-        </div>
+            <div class="players-grid">
+                </div>
+        </section>
+        <section class="tier-section tier-4">
+            <h2>Tier 4</h2>
+            <div class="players-grid">
+                </div>
+        </section>
+        <section class="tier-section tier-5">
+            <h2>Tier 5</h2>
+            <div class="players-grid">
+                </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
