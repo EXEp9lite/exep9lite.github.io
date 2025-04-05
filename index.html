@@ -1,24 +1,39 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vanilla Leaderboard</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Player Rankings</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Vanilla Leaderboard</h1>
-
-    <div class="tiers-container low-tier">
-        <h2>Low Tier</h2>
-        <div class="tiers"></div>
-    </div>
-
-    <div class="tiers-container high-tier">
-        <h2>High Tier</h2>
-        <div class="tiers"></div>
-    </div>
-
+    <header>
+        <h1>Player Rankings</h1>
+    </header>
+    <main>
+        <div id="tiers">
+            <div class="tier" id="tier1">
+                <h2>Tier 1</h2>
+                <ul></ul>
+            </div>
+            <div class="tier" id="tier2">
+                <h2>Tier 2</h2>
+                <ul></ul>
+            </div>
+            <div class="tier" id="tier3">
+                <h2>Tier 3</h2>
+                <ul></ul>
+            </div>
+            <div class="tier" id="tier4">
+                <h2>Tier 4</h2>
+                <ul></ul>
+            </div>
+            <div class="tier" id="tier5">
+                <h2>Tier 5</h2>
+                <ul></ul>
+            </div>
+        </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
