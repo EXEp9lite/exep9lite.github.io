@@ -11,13 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateTiers(players) {
         tiersContainer.querySelectorAll('.tier ul').forEach(ul => ul.innerHTML = ''); // Wyczyść istniejące listy
 
-        players.forEach((player, index) => {
+        players.forEach(player => {
             const tierId = `tier-${player.tier}`;
             const tierElement = document.getElementById(tierId);
             if (tierElement) {
                 const li = document.createElement('li');
-                const playerNumber = index + 1;
-                li.innerHTML = `<span>Player ${playerNumber}</span> <a href="https://github.com/exep9lite" target="_blank">${player.name}</a>`;
+                li.innerHTML = `<a href="https://github.com/exep9lite" target="_blank">${player.name}</a>`;
 
                 if (player.highlight === 'high') {
                     li.classList.add('high');
