@@ -1,20 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vanilla Leaderboard</title>
+    <title>Podobna Strona MCTiers</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="header">
-        <h1>Vanilla Leaderboard</h1>
-        <button class="refresh-btn" id="refreshBtn">Refresh Data</button>
-    </div>
-    
-    <div class="tiers-container" id="tiersContainer">
-        <!-- Tiers will be loaded from script.js -->
-    </div>
+    <header>
+        <div class="logo">MCTIERS</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Rankingi</a></li>
+                <li><a href="#">Discordy</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <input type="text" placeholder="Szukaj gracza...">
+            <button>Q</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="tier-select">
+            <button class="active">Vanilla</button>
+            </div>
+
+        <div class="tiers-container">
+            <div class="tier" id="tier-1">
+                <h2>Tier 1</h2>
+                <ul>
+                    </ul>
+            </div>
+            <div class="tier" id="tier-2">
+                <h2>Tier 2</h2>
+                <ul>
+                    </ul>
+            </div>
+            <div class="tier" id="tier-3">
+                <h2>Tier 3</h2>
+                <ul>
+                    </ul>
+            </div>
+            <div class="tier" id="tier-4">
+                <h2>Tier 4</h2>
+                <ul>
+                    </ul>
+            </div>
+            <div class="tier" id="tier-5">
+                <h2>Tier 5</h2>
+                <ul>
+                    </ul>
+            </div>
+        </div>
+
+        <div class="show-kit-button">
+            <button>SHOW KIT</button>
+        </div>
+    </main>
 
     <script src="script.js"></script>
 </body>
