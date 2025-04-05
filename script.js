@@ -69,6 +69,6 @@ async function renderLeaderboard() {
 
 document.addEventListener('DOMContentLoaded', () => {
     renderLeaderboard();
-    setInterval(renderLeaderboard, 30000);
+    setInterval(renderLeaderboard, 3000);
     document.getElementById('refreshBtn').addEventListener('click', renderLeaderboard);
 });
