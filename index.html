@@ -29,20 +29,6 @@
             width: 100%;
             top: 0;
             z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .refresh-btn {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
         }
         
         .tiers-container {
@@ -63,7 +49,6 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            height: calc(100% - 20px);
         }
         
         .tier-header {
@@ -73,29 +58,7 @@
             text-align: center;
             background-color: #252525;
             border-radius: 5px;
-            position: sticky;
-            top: 0;
             color: #3498db;
-        }
-        
-        .players-list {
-            flex-grow: 1;
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: #3498db #2d2d2d;
-        }
-        
-        .players-list::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .players-list::-webkit-scrollbar-track {
-            background: #2d2d2d;
-        }
-        
-        .players-list::-webkit-scrollbar-thumb {
-            background-color: #3498db;
-            border-radius: 6px;
         }
         
         .player {
@@ -103,127 +66,77 @@
             margin-bottom: 8px;
             border-radius: 5px;
             text-align: center;
-            transition: transform 0.2s;
         }
         
-        /* Style graczy */
-        .player.high-tier {
+        .high-tier {
             background-color: #252525;
             border-left: 4px solid #ffd700;
         }
         
-        .player.low-tier {
+        .low-tier {
             background-color: #333333;
             border-left: 4px solid #3498db;
-        }
-        
-        .player:hover {
-            transform: translateX(5px);
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Vanilla Leaderboard</h1>
-        <button class="refresh-btn" id="refreshBtn">Refresh Data</button>
     </div>
     
     <div class="tiers-container" id="tiersContainer">
-        <!-- Tiers will be loaded dynamically -->
+        <!-- Tiers will be loaded from JSON -->
     </div>
 
     <script>
-        // Cache danych aby uniknąć nadmiarowych żądań
-        let lastFetchTime = 0;
-        let cachedData = null;
+        // Ścieżka do Twojego pliku JSON na GitHub
+        const JSON_URL = 'https://raw.githubusercontent.com/username/repo/main/players.json';
         
-        // Funkcja do ładowania danych z pliku JSON z cache'owaniem
-        async function loadPlayerData() {
-            const now = Date.now();
-            // Pobieraj nowe dane maksymalnie co 30 sekund
-            if (!cachedData || now - lastFetchTime > 30000) {
-                try {
-                    // Ścieżka do pliku players.json w Twoim repozytorium
-                    // Zastąp 'username/repo' swoimi danymi
-                    const response = await fetch('https://raw.githubusercontent.com/exep9lite/repo/main/players.json?t=' + now);
-                    
-                    if (!response.ok) {
-                        throw new Error('Failed to load player data');
-                    }
-                    
-                    cachedData = await response.json();
-                    lastFetchTime = now;
-                } catch (error) {
-                    console.error('Error loading player data:', error);
-                    // Domyślne dane w przypadku błędu
-                    cachedData = {
-                        "Tier 1": [
-                            {"name": "Player1", "tier": "high"},
-                            {"name": "Player2", "tier": "low"}
-                        ],
-                        "Tier 2": [
-                            {"name": "Player3", "tier": "high"},
-                            {"name": "Player4", "tier": "low"}
-                        ],
-                        "Tier 3": [
-                            {"name": "Player5", "tier": "high"},
-                            {"name": "Player6", "tier": "low"}
-                        ],
-                        "Tier 4": [
-                            {"name": "Player7", "tier": "high"},
-                            {"name": "Player8", "tier": "low"}
-                        ],
-                        "Tier 5": [
-                            {"name": "Player9", "tier": "high"},
-                            {"name": "Player10", "tier": "low"}
-                        ]
-                    };
-                }
-            }
-            return cachedData;
-        }
-
-        // Funkcja renderująca tabele z graczami
-        async function renderLeaderboard() {
-            const tiersContainer = document.getElementById('tiersContainer');
-            tiersContainer.innerHTML = '';
-            
-            const playerData = await loadPlayerData();
-            
-            // Tworzymy kolumny dla każdego tieru
-            for (const [tierName, players] of Object.entries(playerData)) {
-                const tierElement = document.createElement('div');
-                tierElement.className = 'tier';
-                
-                const tierHeader = document.createElement('div');
-                tierHeader.className = 'tier-header';
-                tierHeader.textContent = tierName;
-                
-                const playersList = document.createElement('div');
-                playersList.className = 'players-list';
-                
-                // Dodajemy graczy
-                players.forEach(playerInfo => {
-                    const playerElement = document.createElement('div');
-                    playerElement.className = `player ${playerInfo.tier}-tier`;
-                    playerElement.textContent = playerInfo.name;
-                    playersList.appendChild(playerElement);
-                });
-                
-                tierElement.appendChild(tierHeader);
-                tierElement.appendChild(playersList);
-                tiersContainer.appendChild(tierElement);
+        // Funkcja do ładowania danych
+        async function loadData() {
+            try {
+                const response = await fetch(`${JSON_URL}?t=${Date.now()}`);
+                if (!response.ok) throw new Error('Failed to load data');
+                return await response.json();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                return {
+                    "Tier 1": [
+                        {"name": "Player1", "tier": "high"},
+                        {"name": "Player2", "tier": "low"}
+                    ],
+                    "Tier 2": [
+                        {"name": "Player3", "tier": "high"},
+                        {"name": "Player4", "tier": "low"}
+                    ]
+                };
             }
         }
 
-        // Automatyczne odświeżanie co 30 sekund
-        setInterval(renderLeaderboard, 30000);
-        
-        // Przycisk odświeżania
-        document.getElementById('refreshBtn').addEventListener('click', renderLeaderboard);
+        // Funkcja renderująca
+        async function render() {
+            const data = await loadData();
+            const container = document.getElementById('tiersContainer');
+            container.innerHTML = '';
+            
+            Object.entries(data).forEach(([tierName, players]) => {
+                const tierDiv = document.createElement('div');
+                tierDiv.className = 'tier';
+                
+                tierDiv.innerHTML = `
+                    <div class="tier-header">${tierName}</div>
+                    ${players.map(player => `
+                        <div class="player ${player.tier}-tier">${player.name}</div>
+                    `).join('')}
+                `;
+                
+                container.appendChild(tierDiv);
+            });
+        }
 
-        // Inicjalizacja po załadowaniu strony
-        window.onload = renderLeaderboard;
+        // Odświeżanie co 30 sekund
+        render();
+        setInterval(render, 30000);
     </script>
 </body>
 </html>
