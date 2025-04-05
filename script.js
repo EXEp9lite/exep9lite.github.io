@@ -17,20 +17,46 @@ document.addEventListener('DOMContentLoaded', () => {
             if (playersGrid) {
                 playersGrid.innerHTML = ''; // Wyczyść poprzednich graczy
 
-                playersInTier.forEach(player => {
-                    const playerDiv = document.createElement('div');
-                    playerDiv.classList.add('player');
-                    playerDiv.textContent = player.name;
+                // Oddziel graczy high i low
+                const highTierPlayers = playersInTier.filter(player => player.highlight === 'high');
+                const lowTierPlayers = playersInTier.filter(player => player.highlight === 'low');
+                const normalTierPlayers = playersInTier.filter(player => player.highlight !== 'high' && player.highlight !== 'low');
 
-                    if (player.highlight === 'high') {
-                        playerDiv.classList.add('high');
-                    } else if (player.highlight === 'low') {
-                        playerDiv.classList.add('low');
-                    }
+                // Sortuj alfabetycznie graczy w każdej kategorii
+                highTierPlayers.sort((a, b) => a.name.localeCompare(b.name));
+                lowTierPlayers.sort((a, b) => a.name.localeCompare(b.name));
+                normalTierPlayers.sort((a, b) => a.name.localeCompare(b.name));
 
+                // Dodaj graczy do siatki w odpowiedniej kolejności
+                highTierPlayers.forEach(player => {
+                    const playerDiv = createPlayerElement(player);
+                    playersGrid.appendChild(playerDiv);
+                });
+
+                normalTierPlayers.forEach(player => {
+                    const playerDiv = createPlayerElement(player);
+                    playersGrid.appendChild(playerDiv);
+                });
+
+                lowTierPlayers.forEach(player => {
+                    const playerDiv = createPlayerElement(player);
                     playersGrid.appendChild(playerDiv);
                 });
             }
         });
+    }
+
+    function createPlayerElement(player) {
+        const playerDiv = document.createElement('div');
+        playerDiv.classList.add('player');
+        playerDiv.textContent = player.name;
+
+        if (player.highlight === 'high') {
+            playerDiv.classList.add('high');
+        } else if (player.highlight === 'low') {
+            playerDiv.classList.add('low');
+        }
+
+        return playerDiv;
     }
 });
