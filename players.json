@@ -1,7 +1,22 @@
 {
-    "Tier 1": ["Player1", "Player2"],
-    "Tier 2": ["Player3", "Player4"],
-    "Tier 3": ["Player5", "Player6"],
-    "Tier 4": ["Player7", "Player8"],
-    "Tier 5": ["Test", "Player10"]
+    "Tier 1": [
+        {"name": "Player1", "tier": "high"},
+        {"name": "Player2", "tier": "low"}
+    ],
+    "Tier 2": [
+        {"name": "Player3", "tier": "high"},
+        {"name": "Player4", "tier": "low"}
+    ],
+    "Tier 3": [
+        {"name": "Player5", "tier": "high"},
+        {"name": "Player6", "tier": "low"}
+    ],
+    "Tier 4": [
+        {"name": "Player7", "tier": "high"},
+        {"name": "Player8", "tier": "low"}
+    ],
+    "Tier 5": [
+        {"name": "Player9", "tier": "high"},
+        {"name": "Player10", "tier": "low"}
+    ]
 }
