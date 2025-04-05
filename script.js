@@ -45,18 +45,3 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    function createPlayerElement(player) {
-        const playerDiv = document.createElement('div');
-        playerDiv.classList.add('player');
-        playerDiv.textContent = player.name;
-
-        if (player.highlight === 'high') {
-            playerDiv.classList.add('high');
-        } else if (player.highlight === 'low') {
-            playerDiv.classList.add('low');
-        }
-
-        return playerDiv;
-    }
-});
