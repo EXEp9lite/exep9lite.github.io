@@ -22,6 +22,14 @@ async function loadData() {
             "Tier 3": [
                 {"name": "Player5", "tier": "high"},
                 {"name": "Player6", "tier": "low"}
+            ],
+            "Tier 4": [
+                {"name": "Player7", "tier": "high"},
+                {"name": "Player8", "tier": "low"}
+            ],
+            "Tier 5": [
+                {"name": "Player9", "tier": "high"},
+                {"name": "Player10", "tier": "low"}
             ]
         };
     }
@@ -33,7 +41,7 @@ async function renderLeaderboard() {
     const container = document.getElementById('tiersContainer');
     container.innerHTML = '';
     
-    // Sortowanie tierów według własnej kolejności
+    // Sortowanie tierów od 1 do 5
     const tierOrder = ['Tier 1', 'Tier 2', 'Tier 3', 'Tier 4', 'Tier 5'];
     const sortedTiers = Object.keys(data).sort((a, b) => {
         return tierOrder.indexOf(a) - tierOrder.indexOf(b);
