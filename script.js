@@ -11,12 +11,20 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateTiers(players) {
         tiersContainer.querySelectorAll('.tier ul').forEach(ul => ul.innerHTML = ''); // Wyczyść istniejące listy
 
-        players.forEach(player => {
+        players.forEach((player, index) => {
             const tierId = `tier-${player.tier}`;
             const tierElement = document.getElementById(tierId);
             if (tierElement) {
                 const li = document.createElement('li');
-                li.textContent = player.name;
+                const playerNumber = index + 1;
+                li.innerHTML = `<span>Player ${playerNumber}</span> <a href="https://github.com/exep9lite" target="_blank">${player.name}</a>`;
+
+                if (player.highlight === 'high') {
+                    li.classList.add('high');
+                } else if (player.highlight === 'low') {
+                    li.classList.add('low');
+                }
+
                 tierElement.querySelector('ul').appendChild(li);
             }
         });
