@@ -29,6 +29,20 @@
             width: 100%;
             top: 0;
             z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .refresh-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
         }
         
         .tiers-container {
@@ -53,7 +67,6 @@
         }
         
         .tier-header {
-            color: #3498db;
             font-size: 1.5em;
             padding: 10px;
             margin-bottom: 15px;
@@ -62,6 +75,19 @@
             border-radius: 5px;
             position: sticky;
             top: 0;
+        }
+        
+        /* Kolory dla high/low tier */
+        .high-tier .tier-header {
+            background: linear-gradient(135deg, #252525, #1a1a1a);
+            color: #ffd700;
+            border: 1px solid #ffd700;
+        }
+        
+        .low-tier .tier-header {
+            background: linear-gradient(135deg, #252525, #2d2d2d);
+            color: #3498db;
+            border: 1px solid #3498db;
         }
         
         .players-list {
@@ -87,108 +113,122 @@
         .player {
             padding: 12px;
             margin-bottom: 8px;
-            background-color: #3a3a3a;
             border-radius: 5px;
             text-align: center;
             transition: transform 0.2s, background-color 0.2s;
         }
         
+        /* Style graczy w zależności od tieru */
+        .high-tier .player {
+            background-color: #3a3a3a;
+            border-left: 4px solid #ffd700;
+        }
+        
+        .low-tier .player {
+            background-color: #333333;
+            border-left: 4px solid #3498db;
+        }
+        
         .player:hover {
-            background-color: #3498db;
-            color: white;
             transform: translateX(5px);
         }
         
-        .tier:nth-child(1) .tier-header {
-            color: #ffd700;
+        .high-tier .player:hover {
+            background-color: #444444;
         }
         
-        .tier:nth-child(2) .tier-header {
-            color: #c0c0c0;
-        }
-        
-        .tier:nth-child(3) .tier-header {
-            color: #cd7f32;
-        }
-        
-        @media (max-width: 768px) {
-            .tiers-container {
-                flex-wrap: nowrap;
-            }
-            
-            .tier {
-                min-width: 200px;
-            }
+        .low-tier .player:hover {
+            background-color: #3a3a3a;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Vanilla Leaderboard</h1>
+        <button class="refresh-btn" id="refreshBtn">Refresh Data</button>
     </div>
     
-    <div class="tiers-container">
-        <div class="tier">
-            <div class="tier-header">Tier 1</div>
-            <div class="players-list" id="tier1">
-                <!-- Players will be added here -->
-            </div>
-        </div>
-        
-        <div class="tier">
-            <div class="tier-header">Tier 2</div>
-            <div class="players-list" id="tier2">
-                <!-- Players will be added here -->
-            </div>
-        </div>
-        
-        <div class="tier">
-            <div class="tier-header">Tier 3</div>
-            <div class="players-list" id="tier3">
-                <!-- Players will be added here -->
-            </div>
-        </div>
-        
-        <div class="tier">
-            <div class="tier-header">Tier 4</div>
-            <div class="players-list" id="tier4">
-                <!-- Players will be added here -->
-            </div>
-        </div>
-        
-        <div class="tier">
-            <div class="tier-header">Tier 5</div>
-            <div class="players-list" id="tier5">
-                <!-- Players will be added here -->
-            </div>
-        </div>
+    <div class="tiers-container" id="tiersContainer">
+        <!-- Tiers will be loaded dynamically -->
     </div>
 
     <script>
-        // Przykładowe dane - możesz je zmienić
-        const players = {
-            tier1: ["MythicPlayer", "ProGamer123", "EliteWarrior", "TopFragger"],
-            tier2: ["SkilledOne", "FastReact", "PrecisionX", "TacticalMind", "QuickScope"],
-            tier3: ["AverageJoe", "CasualPlayer", "WeekendWarrior", "PartTimer"],
-            tier4: ["Rookie123", "NewbiePro", "LearningFast", "ImprovingDaily"],
-            tier5: ["JustStarted", "FirstTimer", "NoobMaster", "BabySteps"]
+        // Konfiguracja - które tiery są high/low
+        const tierConfig = {
+            highTiers: ['Tier 1', 'Tier 2'],
+            lowTiers: ['Tier 3', 'Tier 4', 'Tier 5']
         };
 
-        // Dodanie graczy do listy
-        function addPlayers() {
-            for (const tier in players) {
-                const list = document.getElementById(tier);
-                players[tier].forEach(player => {
-                    const playerElement = document.createElement("div");
-                    playerElement.className = "player";
-                    playerElement.textContent = player;
-                    list.appendChild(playerElement);
-                });
+        // Funkcja do ładowania danych z pliku JSON
+        async function loadPlayerData() {
+            try {
+                // Ścieżka do pliku players.json w Twoim repozytorium
+                const response = await fetch('https://raw.githubusercontent.com/TwojaNazwaUzytkownika/TwojeRepozytorium/main/players.json');
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load player data');
+                }
+                
+                return await response.json();
+            } catch (error) {
+                console.error('Error loading player data:', error);
+                // Domyślne dane w przypadku błędu
+                return {
+                    "Tier 1": ["Player1", "Player2"],
+                    "Tier 2": ["Player3", "Player4"],
+                    "Tier 3": ["Player5", "Player6"],
+                    "Tier 4": ["Player7", "Player8"],
+                    "Tier 5": ["Player9", "Player10"]
+                };
             }
         }
 
+        // Funkcja renderująca tabele z graczami
+        async function renderLeaderboard() {
+            const tiersContainer = document.getElementById('tiersContainer');
+            tiersContainer.innerHTML = '';
+            
+            const playerData = await loadPlayerData();
+            
+            // Tworzymy kolumny dla każdego tieru
+            for (const [tierName, players] of Object.entries(playerData)) {
+                const tierElement = document.createElement('div');
+                tierElement.className = 'tier';
+                
+                // Dodajemy klasę w zależności od typu tieru
+                if (tierConfig.highTiers.includes(tierName)) {
+                    tierElement.classList.add('high-tier');
+                } else if (tierConfig.lowTiers.includes(tierName)) {
+                    tierElement.classList.add('low-tier');
+                }
+                
+                const tierHeader = document.createElement('div');
+                tierHeader.className = 'tier-header';
+                tierHeader.textContent = tierName;
+                
+                const playersList = document.createElement('div');
+                playersList.className = 'players-list';
+                playersList.id = tierName.toLowerCase().replace(' ', '-');
+                
+                // Dodajemy graczy
+                players.forEach(player => {
+                    const playerElement = document.createElement('div');
+                    playerElement.className = 'player';
+                    playerElement.textContent = player;
+                    playersList.appendChild(playerElement);
+                });
+                
+                tierElement.appendChild(tierHeader);
+                tierElement.appendChild(playersList);
+                tiersContainer.appendChild(tierElement);
+            }
+        }
+
+        // Przycisk odświeżania
+        document.getElementById('refreshBtn').addEventListener('click', renderLeaderboard);
+
         // Inicjalizacja po załadowaniu strony
-        window.onload = addPlayers;
+        window.onload = renderLeaderboard;
     </script>
 </body>
 </html>
