@@ -113,22 +113,24 @@ main {
     margin-right: 0.5rem;
 }
 
+.tier ul li a {
+    color: #58a6ff;
+    text-decoration: none;
+    margin-left: 0.5rem;
+    transition: color 0.2s ease-in-out; /* Dodaj animację dla płynnego przejścia */
+}
+
+.tier ul li a:hover {
+    color: #9cdcfe; /* Jaśniejszy kolor po najechaniu */
+    text-decoration: underline;
+}
+
 .tier ul li.high {
-    background-color: #37474f; /* Ciemniejszy odcień szarości */
+    background-color: #2962ff; /* Ciemnoniebieski */
     color: #fff;
 }
 
 .tier ul li.low {
-    background-color: #263238; /* Jaśniejszy odcień szarości */
-    color: #ccc;
-}
-
-.tier ul li a {
-    color: #58a6ff; /* Link do profilu (możesz zmienić) */
-    text-decoration: none;
-    margin-left: 0.5rem;
-}
-
-.tier ul li a:hover {
-    text-decoration: underline;
+    background-color: #64b5f6; /* Jasnoniebieski */
+    color: #212121; /* Ciemniejszy kolor tekstu dla lepszego kontrastu */
 }
