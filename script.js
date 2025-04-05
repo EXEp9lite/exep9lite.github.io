@@ -1,11 +1,8 @@
-// Ścieżka do Twojego pliku JSON na GitHub
-// Zastąp 'username/repo' swoimi danymi
 const JSON_URL = 'players.json';
 
-// Funkcja do ładowania danych z cache'owaniem
 async function loadData() {
     try {
-        const response = await fetch(`${JSON_URL}
+        const response = await fetch(`${JSON_URL}`);
         if (!response.ok) throw new Error('Failed to load data');
         return await response.json();
     } catch (error) {
@@ -35,7 +32,6 @@ async function loadData() {
     }
 }
 
-// Funkcja renderująca leaderboard
 async function renderLeaderboard() {
     const data = await loadData();
     const container = document.getElementById('tiersContainer');
@@ -71,7 +67,6 @@ async function renderLeaderboard() {
     });
 }
 
-// Odświeżanie co 30 sekund i przyciskiem
 document.addEventListener('DOMContentLoaded', () => {
     renderLeaderboard();
     setInterval(renderLeaderboard, 30000);
