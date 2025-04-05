@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const tierElement = document.getElementById(tierId);
             if (tierElement) {
                 const li = document.createElement('li');
-                li.innerHTML = `<a href="https://github.com/exep9lite" target="_blank">${player.name}</a>`;
+                li.textContent = player.name;
 
                 if (player.highlight === 'high') {
                     li.classList.add('high');
