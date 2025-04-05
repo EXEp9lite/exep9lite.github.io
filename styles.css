@@ -107,12 +107,6 @@ main {
     border-bottom: none;
 }
 
-.tier ul li span:first-child {
-    /* Numer gracza */
-    color: #888;
-    margin-right: 0.5rem;
-}
-
 .tier ul li a {
     color: #58a6ff;
     text-decoration: none;
