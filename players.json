@@ -1,6 +1,6 @@
 {
     "players": [
-        {"name": "Player1", "tier": 1, "type": "high"},
+        {"name": "Player321", "tier": 1, "type": "high"},
         {"name": "Player132", "tier": 1, "type": "low"},
         {"name": "Player2", "tier": 2, "type": "low"},
         {"name": "Player3", "tier": 3, "type": "high"},
