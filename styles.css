@@ -22,13 +22,21 @@ h1 {
     letter-spacing: 1px;
 }
 
+.tiers-container {
+    display: flex;
+    flex-wrap: wrap; /* Pozwoli tierom przechodzić do nowej linii, jeśli nie mieszczą się */
+    gap: 20px; /* Odstęp między tierami */
+    margin-bottom: 30px; /* Odstęp pod kontenerem tierów */
+}
+
 .tier-section {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
     padding: 25px;
     border-left: 6px solid;
+    flex: 1; /* Każdy tier zajmuje równą dostępną przestrzeń */
+    min-width: 300px; /* Minimalna szerokość tieru */
 }
 
 .tier-1 {
@@ -89,25 +97,9 @@ h2 {
     gap: 8px;
 }
 
-.player.high-tier {
-    background-color: #e0e0e0; /* Ciemniejszy szary */
-}
-
-.player.low-tier {
-    background-color: #f9f9f9; /* Jaśniejszy szary (domyślny) */
-}
-
 .tier-1 .player {
     border-color: #ffd700;
     background-color: #fffae6;
-}
-
-.tier-1 .player.high-tier {
-    background-color: #ffe082; /* Ciemniejszy odcień złotego */
-}
-
-.tier-1 .player.low-tier {
-    background-color: #fffae6; /* Jaśniejszy odcień złotego (domyślny) */
 }
 
 .tier-2 .player {
@@ -115,25 +107,9 @@ h2 {
     background-color: #f5f5f5;
 }
 
-.tier-2 .player.high-tier {
-    background-color: #d3d3d3; /* Ciemniejszy odcień srebrnego */
-}
-
-.tier-2 .player.low-tier {
-    background-color: #f5f5f5; /* Jaśniejszy odcień srebrnego (domyślny) */
-}
-
 .tier-3 .player {
     border-color: #cd7f32;
     background-color: #f8f1e6;
-}
-
-.tier-3 .player.high-tier {
-    background-color: #e6b380; /* Ciemniejszy odcień brązowego */
-}
-
-.tier-3 .player.low-tier {
-    background-color: #f8f1e6; /* Jaśniejszy odcień brązowego (domyślny) */
 }
 
 .tier-4 .player {
@@ -141,25 +117,9 @@ h2 {
     background-color: #ebf5fb;
 }
 
-.tier-4 .player.high-tier {
-    background-color: #81cfe0; /* Ciemniejszy odcień niebieskiego */
-}
-
-.tier-4 .player.low-tier {
-    background-color: #ebf5fb; /* Jaśniejszy odcień niebieskiego (domyślny) */
-}
-
 .tier-5 .player {
     border-color: #9b59b6;
     background-color: #f5eef8;
-}
-
-.tier-5 .player.high-tier {
-    background-color: #c084fc; /* Ciemniejszy odcień fioletowego */
-}
-
-.tier-5 .player.low-tier {
-    background-color: #f5eef8; /* Jaśniejszy odcień fioletowego (domyślny) */
 }
 
 .player:hover {
@@ -185,13 +145,16 @@ h2 {
 }
 
 hr {
-    border: none;
-    height: 2px;
-    background-color: #eee;
-    margin: 30px 0;
+    display: none; /* Ukrywamy linie rozdzielające, ponieważ tiery są teraz obok siebie */
 }
 
 @media (max-width: 768px) {
+    .tiers-container {
+        flex-direction: column; /* Węższe ekrany: tiery jeden pod drugim */
+    }
+    .tier-section {
+        min-width: auto; /* Pozwól tierom zajmować pełną szerokość */
+    }
     .players-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
