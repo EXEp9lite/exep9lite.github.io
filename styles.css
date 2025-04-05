@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #232526, #414345); /* Przyjemny ciemny gradient */
+    background-color: #2B2B2B; /* Jednolity ciemny szary kolor */
     color: #fff;
     margin: 0;
     padding: 0;
@@ -9,14 +9,14 @@ body {
 header {
     text-align: center;
     padding: 20px;
-    background-color: #414345; /* Zbliżony kolor do nagłówka */
-    color: #FFD700; /* Złoty akcent dla nagłówka */
+    background-color: #FFD700; /* Złoty kolor dla nagłówka */
+    color: #000; /* Czarny tekst dla kontrastu */
 }
 
 main {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(5, 1fr); /* 5 kolumn */
+    gap: 15px; /* Odstęp między kolumnami */
     padding: 20px;
 }
 
@@ -24,13 +24,13 @@ main {
     padding: 10px;
     border-radius: 10px;
     text-align: center;
-    background-color: #2C3E50; /* Kolor przypominający ciemny odcień */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background-color: #424242; /* Neutralny szary kolor dla kolumn */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtelny efekt cienia */
 }
 
 .tier h2 {
     margin-bottom: 10px;
-    color: #E74C3C; /* Czerwony akcent dla nagłówków tierów */
+    color: #E74C3C; /* Czerwony akcent dla tytułów */
 }
 
 .tier ul {
@@ -50,13 +50,13 @@ main {
 
 .tier li:hover {
     transform: scale(1.05);
-    background-color: #E67E22; /* Pomarańczowy podświetlenie */
+    background-color: #E67E22; /* Pomarańczowy kolor na hover */
 }
 
 .high {
-    background-color: #3498DB; /* Niebieski dla graczy high tier */
+    background-color: #1E90FF; /* Niebieski dla high tier */
 }
 
 .low {
-    background-color: #85C1E9; /* Jasnoniebieski dla graczy low tier */
+    background-color: #ADD8E6; /* Jasnoniebieski dla low tier */
 }
