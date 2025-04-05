@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MC TIERS - Ranking Graczy Minecraft DoorPvP</title>
+    <title>MC TIERS - Ranking Graczy Minecraft Vanilla</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Dodaję tutaj podstawowe style dla ikon, aby nie było błędów w konsoli */
+        .fas, .fab {
+            font-style: normal; /* Zapobiega kursywie */
+            -webkit-font-smoothing: antialiased;
+        }
+        .fa-home::before { content: "🏠"; }
+        .fa-search::before { content: "🔍"; }
+        .fa-door-open::before { content: "🚪"; }
+        .fa-minecraft::before { content: "🧱"; }
+        .fa-swords::before { content: "⚔️"; }
+        .fa-chevron-down::before { content: "▼"; }
+        .fa-caret-up::before { content: "▲"; }
+    </style>
 </head>
 <body>
     <div class="header">
         <div class="logo">MC<span>TIERS</span></div>
         <div class="navigation">
-            <a href="#"><span><i class="fas fa-home"></i></span> Strona Główna</a>
-            <a href="https://discord.gg/uyaaBcvddr" target="_blank"><span><i class="fab fa-discord"></i></span> Discord</a>
+            <a href="#" class="active"><span><i class="fas fa-home"></i></span> Vanilla</a>
         </div>
         <div class="search-container">
             <span class="search-icon"><i class="fas fa-search"></i></span>
@@ -24,26 +33,12 @@
     </div>
 
     <div class="game-mode">
-        <span class="game-mode-icon"><i class="fas fa-door-open"></i></span>
-        <span class="game-mode-text">DoorPvP</span>
+        <span class="game-mode-icon"><i class="fab fa-minecraft"></i></span>
+        <span class="game-mode-text">Vanilla</span>
     </div>
 
     <div class="main-content" id="tier-container">
         </div>
-
-    <button class="show-kit-button" id="showKit">
-        <span><i class="fas fa-swords"></i></span> POKAŻ ZESTAW
-    </button>
-
-    <div class="kit-overlay" id="kitOverlay">
-        <div class="kit-content">
-            <div class="kit-header">
-                <div class="kit-title">Podstawowy Zestaw DoorPvP</div>
-                <button class="close-kit" id="closeKit">&times;</button>
-            </div>
-            <img src="https://i.ibb.co/PZBb4wLq/Zrzut-ekranu-2025-04-04-203004.png" alt="DoorPvP Kit" class="kit-image">
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>
