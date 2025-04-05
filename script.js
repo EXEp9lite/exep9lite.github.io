@@ -1,33 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const tiersContainer = document.querySelector('.tiers-container');
+    const tierSections = document.querySelectorAll('.tier-section');
 
     fetch('players.json')
         .then(response => response.json())
         .then(data => {
-            updateTiers(data);
+            updateLeaderboard(data);
         })
         .catch(error => console.error('Błąd ładowania danych:', error));
 
-    function updateTiers(players) {
-        tiersContainer.querySelectorAll('.tier ul').forEach(ul => ul.innerHTML = ''); // Wyczyść istniejące listy
+    function updateLeaderboard(players) {
+        tierSections.forEach(section => {
+            const tierNumber = parseInt(section.classList[1].split('-')[1]);
+            const playersInTier = players.filter(player => player.tier === tierNumber);
+            const playersGrid = section.querySelector('.players-grid');
 
-        players.forEach(player => {
-            const tierId = `tier-${player.tier}`;
-            const tierElement = document.getElementById(tierId);
-            if (tierElement) {
-                const li = document.createElement('li');
-                li.textContent = player.name;
+            if (playersGrid) {
+                playersGrid.innerHTML = ''; // Wyczyść poprzednich graczy
 
-                if (player.highlight === 'high') {
-                    li.classList.add('high');
-                } else if (player.highlight === 'low') {
-                    li.classList.add('low');
-                }
+                playersInTier.forEach(player => {
+                    const playerDiv = document.createElement('div');
+                    playerDiv.classList.add('player');
+                    playerDiv.textContent = player.name;
 
-                tierElement.querySelector('ul').appendChild(li);
+                    if (player.highlight === 'high') {
+                        playerDiv.classList.add('high');
+                    } else if (player.highlight === 'low') {
+                        playerDiv.classList.add('low');
+                    }
+
+                    playersGrid.appendChild(playerDiv);
+                });
             }
         });
     }
-
-    // Możesz dodać tutaj kod do obsługi zmiany trybu gry (jeśli będzie więcej niż Vanilla)
 });
