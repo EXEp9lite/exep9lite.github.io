@@ -1,47 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const tierSections = document.querySelectorAll('.tier-section');
+    const tiersContainer = document.querySelector('.tiers-container');
 
     fetch('players.json')
         .then(response => response.json())
         .then(data => {
-            updateLeaderboard(data);
+            updateTiers(data);
         })
         .catch(error => console.error('Błąd ładowania danych:', error));
 
-    function updateLeaderboard(players) {
-        tierSections.forEach(section => {
-            const tierNumber = parseInt(section.classList[1].split('-')[1]);
-            const playersInTier = players.filter(player => player.tier === tierNumber);
-            const playersGrid = section.querySelector('.players-grid');
+    function updateTiers(players) {
+        tiersContainer.querySelectorAll('.tier ul').forEach(ul => ul.innerHTML = ''); // Wyczyść istniejące listy
 
-            if (playersGrid) {
-                playersGrid.innerHTML = ''; // Wyczyść poprzednich graczy
+        players.forEach(player => {
+            const tierId = `tier-${player.tier}`;
+            const tierElement = document.getElementById(tierId);
+            if (tierElement) {
+                const li = document.createElement('li');
+                li.textContent = player.name;
 
-                // Oddziel graczy high i low
-                const highTierPlayers = playersInTier.filter(player => player.highlight === 'high');
-                const lowTierPlayers = playersInTier.filter(player => player.highlight === 'low');
-                const normalTierPlayers = playersInTier.filter(player => player.highlight !== 'high' && player.highlight !== 'low');
+                if (player.highlight === 'high') {
+                    li.classList.add('high');
+                } else if (player.highlight === 'low') {
+                    li.classList.add('low');
+                }
 
-                // Sortuj alfabetycznie graczy w każdej kategorii
-                highTierPlayers.sort((a, b) => a.name.localeCompare(b.name));
-                lowTierPlayers.sort((a, b) => a.name.localeCompare(b.name));
-                normalTierPlayers.sort((a, b) => a.name.localeCompare(b.name));
-
-                // Dodaj graczy do siatki w odpowiedniej kolejności
-                highTierPlayers.forEach(player => {
-                    const playerDiv = createPlayerElement(player);
-                    playersGrid.appendChild(playerDiv);
-                });
-
-                normalTierPlayers.forEach(player => {
-                    const playerDiv = createPlayerElement(player);
-                    playersGrid.appendChild(playerDiv);
-                });
-
-                lowTierPlayers.forEach(player => {
-                    const playerDiv = createPlayerElement(player);
-                    playersGrid.appendChild(playerDiv);
-                });
+                tierElement.querySelector('ul').appendChild(li);
             }
         });
     }
+
+    // Możesz dodać tutaj kod do obsługi zmiany trybu gry (jeśli będzie więcej niż Vanilla)
+});
