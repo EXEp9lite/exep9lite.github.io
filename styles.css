@@ -95,28 +95,15 @@ main {
 }
 
 .tier ul li {
-    padding: 0.7rem 0;
+    padding: 0.7rem 1rem; /* Dodano padding po bokach */
     border-bottom: 1px solid #333;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: block; /* Zmieniono na block, aby tło wypełniało całą szerokość */
     color: #ddd;
+    text-decoration: none; /* Usuwamy potencjalne podkreślenia */
 }
 
 .tier ul li:last-child {
     border-bottom: none;
-}
-
-.tier ul li a {
-    color: #58a6ff;
-    text-decoration: none;
-    margin-left: 0.5rem;
-    transition: color 0.2s ease-in-out; /* Dodaj animację dla płynnego przejścia */
-}
-
-.tier ul li a:hover {
-    color: #9cdcfe; /* Jaśniejszy kolor po najechaniu */
-    text-decoration: underline;
 }
 
 .tier ul li.high {
