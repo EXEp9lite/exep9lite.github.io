@@ -1,36 +1,56 @@
 body {
-    background-color: #f5f5f5;
-    color: #333;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #1E3C72, #2A5298);
+    color: #fff;
+    margin: 0;
+    padding: 0;
 }
 
-.tiers-container.high-tier {
-    background-color: #1c1c1c;
-    color: #f1f1f1;
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #2A5298;
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.tier {
+    width: 18%;
+    padding: 10px;
     border-radius: 10px;
-    padding: 20px;
-    margin-top: 30px;
+    text-align: center;
+    background-color: #34495E;
 }
 
-.tier-section.high {
-    background-color: #2a2a2a;
-    border-left-color: #555;
+.tier h2 {
+    margin-bottom: 10px;
 }
 
-.tier-section.low {
-    background-color: white;
+.tier ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-.player {
-    background-color: #f9f9f9;
-    padding: 12px;
-    border-radius: 6px;
-    border-left: 4px solid;
+.tier li {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s, background-color 0.3s;
 }
 
-.high .player {
-    background-color: #333;
-    color: #ddd;
+.tier li:hover {
+    transform: scale(1.05);
+    background-color: #1E3C72;
+}
+
+.high {
+    background-color: #1E3C72;
+}
+
+.low {
+    background-color: #2A5298;
 }
